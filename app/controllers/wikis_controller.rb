@@ -1,5 +1,7 @@
 class WikisController < ApplicationController
 
+  before_action :private_wiki?, except: [:index, :show, :new, :create]
+
   def index
     @wikis = Wiki.all
   end
@@ -27,7 +29,7 @@ class WikisController < ApplicationController
       flash[:notice] = "Wiki was posted."
       redirect_to @wiki
     else
-      flash.new[:alert] = "There was a problem posting a wiki."
+      flash.now[:alert] = "There was a problem posting a wiki."
       render :new
     end
   end
@@ -57,6 +59,16 @@ class WikisController < ApplicationController
     else
       flash.now[:alert] = "There was a problem deleting the wiki. Try again."
       redirect_to @wiki
+    end
+  end
+
+  def private_wiki?
+    wiki = Wiki.find(params[:id])
+    if wiki.private?
+      if current_user != wiki.user
+        flash.now[:notice] = "This wiki is private."
+        redirect_to wiki_path
+      end
     end
   end
 end
