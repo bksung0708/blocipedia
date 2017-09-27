@@ -40,8 +40,12 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 gem 'thor', '0.19.1'
-
+# Random strings generator
 gem 'faker'
+# In-app user charging API
+gem 'stripe'
+# Handling sensitive data with environment variables(API keys)
+gem 'figaro', '1.0'
 
 group :development do
   gem 'listen', '~> 3.0.5'
