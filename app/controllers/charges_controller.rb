@@ -37,7 +37,14 @@ class ChargesController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    # downgrade user's role to standard
     @user.standard!
+
+    # convert downgrading user's wikis to public
+    @user.wikis.each do |wiki|
+      wiki.private = false
+      wiki.save!
+    end
     redirect_to new_charge_path
   end
 

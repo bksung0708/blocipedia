@@ -6,11 +6,6 @@
   <%= f.text_area :body %>
 
   <div class="form-group">
-    <%= f.label :private, class: 'checkbox' do %>
-      <%= f.check_box :private %> Private wiki
-    <% end %>
+    <%= render partial: 'form', locals: { wiki: @wiki } %>
   </div>
-
-  <%= f.submit "Save" %>
-
 <% end %>
