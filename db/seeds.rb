@@ -7,7 +7,7 @@ require 'faker'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-5.times do
+1.times do
     User.create!(
                 email: Faker::Internet.email,
                 password: Faker::Config.random.seed
@@ -15,7 +15,7 @@ require 'faker'
 end
 users = User.all
 
-10.times do
+1.times do
     Wiki.create!(
                 user: users.sample,
                 title: Faker::Company.bs,

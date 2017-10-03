@@ -1,9 +1,7 @@
 class WikisController < ApplicationController
 
-  before_action :private_wiki?, except: [:index, :show, :new, :create]
-
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -16,6 +14,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.all.standard
   end
 
   def create
@@ -59,16 +58,6 @@ class WikisController < ApplicationController
     else
       flash.now[:alert] = "There was a problem deleting the wiki. Try again."
       redirect_to @wiki
-    end
-  end
-
-  def private_wiki?
-    wiki = Wiki.find(params[:id])
-    if wiki.private?
-      if current_user != wiki.user
-        flash.now[:notice] = "This wiki is private."
-        redirect_to wiki_path
-      end
     end
   end
 end

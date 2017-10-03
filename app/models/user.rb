@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :wikis
   has_many :collaborators
+  has_many :collaborator_wikis, through: :collaborators, source: :wiki
 
   after_initialize :init
 
