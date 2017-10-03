@@ -39,6 +39,7 @@ class ChargesController < ApplicationController
     @user = User.find(params[:id])
     # downgrade user's role to standard
     @user.standard!
+    flash[:notice] = "Your plan is downgraded to standard."
 
     # convert downgrading user's wikis to public
     @user.wikis.each do |wiki|

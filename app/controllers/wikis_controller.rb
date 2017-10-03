@@ -3,7 +3,7 @@ class WikisController < ApplicationController
   before_action :private_wiki?, except: [:index, :show, :new, :create]
 
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -16,6 +16,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def create
@@ -39,6 +40,7 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
     @wiki.private = params[:wiki][:private]
+    authorize @wiki
 
     if @wiki.save
       flash[:notice] = "Wiki was updated."

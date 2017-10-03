@@ -1,0 +1,8 @@
+ <% if collaborator = current_user.favorite_for(wiki) %>
+   <%= link_to [wiki, collaborator], class: 'btn btn-primary', method: :edit do %>
+     <i class="glyphicon glyphicon-star-empty"> </i>&nbsp;
+     <% User.all.each do |user| %>
+       <%= user.email %>
+     <% end %>
+   <% end %>
+ <% end %>
