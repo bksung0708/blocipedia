@@ -4,8 +4,6 @@ Rails.application.routes.draw do
 
   resources :charges, only: [:new, :create, :edit]
 
-  resources :users, only: [:show]
-
   devise_for :users
 
   get 'about' => 'welcome#about'
